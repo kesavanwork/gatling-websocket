@@ -1,0 +1,8 @@
+Environments:
+  local:
+    url: http://localhost
+    mainPort: 7990
+    bank01InPort: 7991
+    bank02InPort: 7992
+    bank01OutPort: 7991
+    bank01OutPort: 7991

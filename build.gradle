@@ -1,0 +1,57 @@
+
+apply plugin: 'scala'
+
+
+dependencies {
+    compile 'org.scala-lang:scala-library:2.11.8'
+    compile 'io.gatling.highcharts:gatling-charts-highcharts:2.2.5'
+    compile 'com.google.guava:guava:18.0'
+    compile 'org.yaml:snakeyaml:1.19'
+}
+
+configurations {
+    gatling
+}
+
+//sourceSet{
+//    simulations {
+//        scala {
+//            srcDirs = ['simulations/load']
+//        }
+//        resources {
+//            srcDirs = ['simulations/resources']
+//        }
+//        compileClasspath += configurations.gatling
+//    }
+//}
+
+task gatlingRun(type: JavaExec) {
+    description = 'Run gatling tests'
+    new File ("${buildDir}/reports/gatling").mkdirs()
+
+//    classpath = sourceSets.simulations.runtimeClasspath + configurations.gatling
+
+    main = "io.gatling.app.Gatling"
+    args = ['-s', 'simulations.SimpleSimulation',
+            '-sf', 'simulations/resources',
+            '-df', 'simulations/resources',
+            '-rf', "${buildDir}/reports/gatling"
+    ]
+}
+
+task showConfigurations {
+    doLast {
+        configurations.all {conf -> println(conf)}
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+task showRepos {
+    doLast {
+        println "All repos:"
+        println repositories.collect { it.name }
+    }
+}
