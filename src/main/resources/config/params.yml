@@ -1,4 +1,4 @@
-Environments:
+paramEnvironments:
   local:
     url: http://localhost
     mainPort: 7990

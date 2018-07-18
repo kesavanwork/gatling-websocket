@@ -32,7 +32,7 @@ task gatlingRun(type: JavaExec) {
 //    classpath = sourceSets.simulations.runtimeClasspath + configurations.gatling
 
     main = "io.gatling.app.Gatling"
-    args = ['-s', 'simulations.SimpleSimulation',
+    args = ['-s', 'simulations.Adaptor.BasicAdaptorTestSimulation',
             '-sf', 'simulations/resources',
             '-df', 'simulations/resources',
             '-rf', "${buildDir}/reports/gatling"
@@ -54,4 +54,24 @@ task showRepos {
         println "All repos:"
         println repositories.collect { it.name }
     }
+}
+
+
+task nftBasicAdaptorTest(type: JavaExec) {
+    classpath = sourceSets.main.runtimeClasspath
+
+    main = 'runner.GatlingRunnerWrapper'
+
+    jvmArgs '-DdurationOfTest=1'
+    jvmArgs '-DtargetEnvironment=local'
+    jvmArgs '-Djava.net.preferIPv4Stack=true'
+    jvmArgs '-XX:MaxMetaspaceSize=128m'
+
+    maxHeapSize = "1G"
+
+    args '-m'
+    args '-nr'
+    args '-bf', 'build/classes/scala/main'
+    args '-rf', 'results'
+    args '-s', 'simulations.Adaptor.BasicAdaptorTestSimulation'
 }

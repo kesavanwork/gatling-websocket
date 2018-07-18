@@ -1,6 +1,5 @@
 package testObjects
 
-import com.sun.tools.javac.util.ByteBuffer
 
 import scala.beans.BeanProperty
 

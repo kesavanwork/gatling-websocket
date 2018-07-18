@@ -6,6 +6,6 @@ object GatlingRunnerWrapper {
 
     def main(args: Array[String]): Unit = {
       java.nio.file.FileSystems.getDefault()
-      Gatling.main(args);
+      Gatling.main(args)
     }
 }

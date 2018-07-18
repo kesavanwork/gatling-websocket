@@ -6,18 +6,20 @@ Reference docs: https://gatling.io/docs/2.3/http/websocket/
 
 package simulations.Adaptor
 
-import environment.{Environment, Environments}
+import environment.{ParamEnvironment, Param}
 import testObjects.AccountVerification_ISO8583_Message
 import io.gatling.core.Predef._
 import io.gatling.http.Predef._
 
 class BasicAdaptorTestSimulation extends Simulation {
 
-  private val environmment = Environment.currentEnvironment
-  private val constructed_baseurl = environmment.url + environmment.mainPort
+  private val environmment = Param.currentEnvironment
+  private val constructed_baseurl = "http://localhost:7990"
+//  private val constructed_baseurl = environmment.url + ":" + environmment.mainPort
   println(s" the Constructed base url value constructed is $constructed_baseurl")
 
-  private val constructed_wsurl = environmment.url + environmment.mainPort
+//  private val constructed_wsurl = environmment.url + ":" + environmment.mainPort
+  private val constructed_wsurl = "http://localhost:7990"
   println(s" the constructed Web Socket url value constructed is $constructed_wsurl")
 
   val accountVerification_Message  =  AccountVerification_ISO8583_Message.accountVerificationMessage
@@ -45,7 +47,7 @@ class BasicAdaptorTestSimulation extends Simulation {
     // .sendBytes(bytes: Expression[Array[Byte]])
 
   setUp(scn.inject(
-    constantUsersPerSec(10) during (400)
+    constantUsersPerSec(1) during (10)
   )).protocols(httpProtocol)
 }
 

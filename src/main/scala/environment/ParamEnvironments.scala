@@ -2,14 +2,16 @@ package environment
 
 
 import com.google.common.collect.Maps
-import scala.beans.BeanProperty
 
-class Environments {
-  @BeanProperty var environments: java.util.Map[String, Environment] = Maps.newHashMap[String, Environment] ()
+import scala.beans.BeanProperty
+import scala.collection.JavaConverters._
+
+class ParamEnvironments {
+  @BeanProperty var paramEnvironments: java.util.Map[String, ParamEnvironment] = Maps.newHashMap[String, ParamEnvironment]()
 }
 
 
-class Environment {
+class ParamEnvironment {
   @BeanProperty var url: String = null
   @BeanProperty var mainPort: Int = 7990
   @BeanProperty var bank01InPort: Int = 7991
